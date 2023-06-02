@@ -3,7 +3,7 @@
 //let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 let expenses = [];
 function getExpenses(){
-axios.get("https://crudcrud.com/api/7c7aa12c75c44c018291c832c9c3db00/expense")
+axios.get("https://crudcrud.com/api/a913d2dc4b5f44e2a48163326889465a/expense1")
 .then((res)=>{
 expenses=res.data
 updateExpenseList();
@@ -33,7 +33,7 @@ function addExpense() {
 
   // Save the updated expenses array to local storage
   //localStorage.setItem('expenses', JSON.stringify(expenses));
-  axios.post("https://crudcrud.com/api/7c7aa12c75c44c018291c832c9c3db00/expense" , newExpense)
+  axios.post("https://crudcrud.com/api/a913d2dc4b5f44e2a48163326889465a/expense1" , newExpense)
 
   .then((res)=>{
     expenses.push(res.data)
@@ -70,8 +70,8 @@ function updateExpenseList() {
       <div>Category: ${expense.category}</div>
       <div>Amount: ${expense.amount}</div>
       <div>Description: ${expense.description}</div>
-      <button onclick="editExpense(${expense._id})">Edit</button>
-      <button onclick="deleteExpense(${expense._id})">Delete</button>
+      <button onclick="editExpense('${expense._id}')">Edit</button>
+      <button onclick="deleteExpense('${expense._id}')">Delete</button>
     `;
     expenseList.appendChild(expenseItem);
   });
@@ -92,7 +92,7 @@ function updateExpense(expenseId) {
 
     // Save the updated expenses array to local storage
     //localStorage.setItem('expenses', JSON.stringify(expenses));
-    axios.put(`https://crudcrud.com/api/7c7aa12c75c44c018291c832c9c3db00/expense/${expenseId}`, updatedExpense)
+    axios.put(`https://crudcrud.com/api/a913d2dc4b5f44e2a48163326889465a/expense1/${expenseId}`, updatedExpense)
 
     .then((res)=>{
     //const index = expenses.findIndex(expense => expense.id === expenseId);
@@ -158,10 +158,11 @@ function deleteExpense(expenseId) {
   //console.log(expenses)
   // Save the updated expenses array to local storage
   //localStorage.setItem('expenses', JSON.stringify(expenses));
-  axios.delete(`https://crudcrud.com/api/7c7aa12c75c44c018291c832c9c3db00/expense/${expenseId}`)
+  axios.delete(`https://crudcrud.com/api/a913d2dc4b5f44e2a48163326889465a/expense1/${expenseId}`)
 
   .then((res)=>{
   expenses = expenses.filter(expense => expense._id !== expenseId);
+  updateExpenseList();
     console.log(res)
   })
   .catch((err)=>{
@@ -169,7 +170,7 @@ function deleteExpense(expenseId) {
   })
 
   // Update the expense list display
-  updateExpenseList();
+ 
 }
 
 // Display the initial expense list
